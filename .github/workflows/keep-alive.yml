@@ -5,7 +5,7 @@ on:
   workflow_dispatch: # 允许手动触发
   schedule:
     # 每周五的中午12点（UTC时间为凌晨4点）
-    - cron: '*/55 * * * *'
+    - cron: '*/50 * * * *'
 
 jobs:
   keep-alive:
