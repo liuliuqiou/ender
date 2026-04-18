@@ -1,10 +1,10 @@
 # GitHub Actions 定时重新部署保活
-name: Keep back4 App Alive
+name: Keep back4app Alive
 
 on:
   workflow_dispatch: # 允许手动触发
   schedule:
-    # 每55分钟重新推送一次（避免12小时睡眠机制）
+    # 每周五的中午12点（UTC时间为凌晨4点）
     - cron: '*/55 * * * *'
 
 jobs:
@@ -32,13 +32,13 @@ jobs:
           echo "开始保活流程 - $(date)"
           git pull origin main || git pull origin master || echo "拉取失败，继续执行"
           
-          # 创建空提交以触发Streamlit重新部署
+          # 创建空提交以触发GalaxyCloud重新部署
           git commit --allow-empty -m "🔄 自动保活: $(date '+%Y-%m-%d %H:%M:%S UTC') - 防止应用睡眠"
           
           # 推送到远程仓库触发重新部署
           git push
           
-          echo "保活完成 - back4应用将重新部署并保持活跃"
+          echo "保活完成 - GalaxyCloud应用将重新部署并保持活跃"
         continue-on-error: true
 
       - name: 生成README.md文件
@@ -56,7 +56,7 @@ jobs:
           
           # 创建README.md内容（直接覆盖）
           cat > README.md << EOF
-          # back4项目保活
+          # GalaxyCloud项目保活
 
           **最后运行时间**: \`$TIMESTAMP\`
 
