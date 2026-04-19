@@ -10,7 +10,7 @@ CONNECT_SID = os.environ.get("CONNECT_SID", "")
 GH_TOKEN = os.environ.get("GH_TOKEN", "")
 GH_REPO = os.environ.get("GITHUB_REPOSITORY", "")
 
-APP_ID = "7b0b9def-f761-4b35-b578-bd810a9a3f9a"  # 替换成你自己的 Back4App App ID
+APP_ID = "d54d86c4-1cc3-48a0-b7f7-169fffc36d78"  # 替换成你自己的 Back4App App ID
 APP_URL = f"https://containers.back4app.com/apps/{APP_ID}"
 PROXY = ""
 
