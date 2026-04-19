@@ -1,0 +1,37 @@
+name: B4A Auto Redeploy
+
+on:
+  schedule:
+    - cron: "*/50 * * * *"   # 每 50 分钟执行一次（分钟为 0 和 50）
+  workflow_dispatch:
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install seleniumbase requests pynacl
+
+      - name: Run redeploy script
+        env:
+          CONNECT_SID: ${{ secrets.CONNECT_SID }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python b4a_redeploy.py
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: "*.png"
