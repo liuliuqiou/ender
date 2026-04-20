@@ -2,7 +2,7 @@ const WebSocket = require("ws");
 const http = require("http");
 const { parseVLESSHeader } = require("./vless");
 
-const UUID = "YOUR-UUID-HERE"; // ← 换成你的 UUID
+const UUID = "08882b6f-8dac-47f6-950c-25d23691f0ee"; // ← 换成你的 UUID
 
 const server = http.createServer((req, res) => {
     res.writeHead(200);
