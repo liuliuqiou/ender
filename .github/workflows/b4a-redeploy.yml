@@ -1,17 +1,25 @@
 name: B4A Auto Redeploy
 
 on:
-  schedule:
-    - cron: "*/50 * * * *"   # 每 50 分钟执行一次（分钟为 0 和 50）
+  #repository_dispatch:
+  #  types: [googlecloud-trigger]   # 必须和 event_type 完全一致
   workflow_dispatch:
 
 jobs:
   redeploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
+      - uses: actions/checkout@v4
+
+      # =========================
+      # 🟡 ⭐ 私有仓库
+      # =========================
+      - name: Checkout private repo
         uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/Back4app
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: .
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -26,7 +34,8 @@ jobs:
         env:
           CONNECT_SID: ${{ secrets.CONNECT_SID }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: python b4a_redeploy.py
 
       - name: Upload screenshots
