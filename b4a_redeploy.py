@@ -6,8 +6,8 @@ from nacl.encoding import Base64Encoder
 from nacl.public import PublicKey, SealedBox
 from seleniumbase import SB
 
-CONNECT_SID = os.environ.get("CONNECT_SID", "s%3Aq19aYI4eTRmy2d2YoSuqSVZZ16KnP6sb.JoBg8enE6dZKY3HzMz6XmqSJPiULD5ydVo3y0xJl7is")
-GH_TOKEN = os.environ.get("GH_TOKEN", "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")
+CONNECT_SID = os.environ.get("CONNECT_SID", "")
+GH_TOKEN = os.environ.get("GH_TOKEN", "")
 GH_REPO = os.environ.get("GITHUB_REPOSITORY", "")
 
 APP_ID = "d54d86c4-1cc3-48a0-b7f7-169fffc36d78"  # 替换成你自己的 Back4App App ID
